@@ -25,7 +25,7 @@ class TFormDivider extends StatelessWidget {
           ),
         ),
         Text(
-          deviderText!,
+          deviderText,
           style: Theme.of(context).textTheme.labelMedium,
         ),
         Flexible(
