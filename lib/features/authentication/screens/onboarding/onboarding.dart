@@ -101,7 +101,7 @@ class OnBoardingNextButton extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             shape: const CircleBorder(),
-            backgroundColor: dark ? TColors.primary : Colors.black,
+            backgroundColor: dark ? TColors.primary : Colors.white,
             foregroundColor: Colors.white,
           ),
           child: const Icon(
