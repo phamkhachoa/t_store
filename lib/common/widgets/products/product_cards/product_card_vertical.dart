@@ -7,6 +7,7 @@ import 'package:t_store/common/widgets/icons/t_circular_icon.dart';
 import 'package:t_store/common/widgets/images/t_rounded_image.dart';
 import 'package:t_store/common/widgets/texts/product_price_text.dart';
 import 'package:t_store/common/widgets/texts/product_title_text.dart';
+import 'package:t_store/common/widgets/texts/t_brand_title_text_with_verified_icon.dart';
 import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
@@ -84,17 +85,18 @@ class TProductCardVertical extends StatelessWidget {
                     smallSize: true,
                   ),
                   const SizedBox(height: TSizes.spaceBtwItems / 2),
-                  Row(
-                    children: [
-                      Text(
-                        'Nike',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: Theme.of(context).textTheme.labelMedium,
-                      ), const SizedBox(width: TSizes.xs,),
-                      const Icon(Iconsax.verify5, color: TColors.primary, size: TSizes.iconXs,)
-                    ],
-                  ),
+                  TBrandTitleWithVerifiedIcon(title: 'Nike'),
+                  // Row(
+                  //   children: [
+                  //     Text(
+                  //       'Nike',
+                  //       overflow: TextOverflow.ellipsis,
+                  //       maxLines: 1,
+                  //       style: Theme.of(context).textTheme.labelMedium,
+                  //     ), const SizedBox(width: TSizes.xs,),
+                  //     const Icon(Iconsax.verify5, color: TColors.primary, size: TSizes.iconXs,)
+                  //   ],
+                  // ),
                 ],
               ),
             ),
