@@ -57,6 +57,8 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   capped_progress_indicator: ^0.0.2
   circle_avatar: ^1.0.1
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.3.5
 
 dev_dependencies:
   flutter_test:
