@@ -8,19 +8,19 @@ import 'hive_utils.dart';
 class Global {
   static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  NavigatorState getNav() {
+  static NavigatorState getNav() {
     return Global.navigatorKey.currentState!;
   }
 
-  Future<Object?> pushNamed(String name, {Object? arguments, FeatureEnum? feature}) {
-    if (feature != null) {
-      countUsageFeature(feature);
-    }
+  static Future<Object?> pushNamed(String name, {Object? arguments, FeatureEnum? feature}) {
+    // if (feature != null) {
+    //   countUsageFeature(feature);
+    // }
     // logEvent(name);
     return getNav().pushNamed(name, arguments: arguments);
   }
 
-  Future<void> countUsageFeature(FeatureEnum feature) async {
+  static Future<void> countUsageFeature(FeatureEnum feature) async {
     final box = await HiveUtils.openBox(boxName: HiveBox.featureUsage);
     int count = box.get(feature.name, defaultValue: 0);
     box.put(feature.name, count + 1);

@@ -28,7 +28,7 @@ class VerifyEmailScreen extends StatelessWidget {
               /// Image
               Image(
                 image: AssetImage(TImages.deliveredEmailIllustration),
-                width: THelperFunctions.screenWidth() * 0.6,
+                width: THelperFunctions.screenWidth(context) * 0.6,
               ),
 
               const SizedBox(

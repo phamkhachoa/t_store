@@ -18,7 +18,12 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(OnboardingController());
+    // Perform navigation check after build
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   OnboardingController.instance.checkAppFlow(context);
+    // });
+
+    final controller = OnboardingController();
     return Scaffold(
       body: Stack(
         children: [
