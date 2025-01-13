@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:equatable/equatable.dart';
 
 class LoginState extends Equatable {
@@ -34,20 +36,22 @@ class LoginState extends Equatable {
     String? password,
     bool? isFillFull
   }) {
-    return LoginState(
+    var loginState = LoginState(
       // status: status ?? this.status,
       // isValidInput: isValidInput ?? this.isValidInput,
+      isFillFull: isFillFull ?? this.isFillFull,
       username: username ?? this.username,
       password: password ?? this.password,
       // apiError: apiError,
       // biometricType: biometricType ?? this.biometricType,
       // toggle: toggle ?? this.toggle,
-      isFillFull: isFillFull ?? this.isFillFull,
+
       // isSave: isSave ?? this.isSave,
       // isShowBiometric: isShowBiometric ?? this.isShowBiometric,
       // typeBiometric: typeBiometric ?? this.typeBiometric,
       // sipAccountInfo: sipAccountInfo ?? this.sipAccountInfo,
     );
+    return loginState;
   }
 
   @override
@@ -59,7 +63,7 @@ class LoginState extends Equatable {
     // apiError,
     // biometricType,
     // toggle,
-    // isFillFull,
+    isFillFull,
     // isSave,
     // typeBiometric,
     // sipAccountInfo

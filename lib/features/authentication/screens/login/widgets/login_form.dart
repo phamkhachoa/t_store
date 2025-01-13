@@ -21,91 +21,105 @@ class TLoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginBloc, LoginState>(
-      builder: (context, state) {
-        print('Build TLoginForm +++++++++++++++++++++');
-        return Form(
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
-            child: Column(
-              children: [
-                TextFormField(
-                  onChanged: (username) => context
-                      .read<LoginBloc>()
-                      .add(LoginUsernameChanged(username)),
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Iconsax.direct_right),
-                    labelText: TTexts.emailOrUsername,
-                  ),
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwInputFields,
-                ),
-                TextFormField(
-                  onChanged: (password) => context
-                      .read<LoginBloc>()
-                      .add(LoginPasswordChanged(password)),
-                  decoration: const InputDecoration(
-                    prefixIcon: Icon(Iconsax.password_check),
-                    labelText: TTexts.password,
-                  ),
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwInputFields,
-                ),
+    print('+++++++++++++++++++++ Build TLoginForm +++++++++++++++++++++');
+    return Form(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
+        child: Column(
+          children: [
+            _UsernameInput(),
+            const SizedBox(height: TSizes.spaceBtwInputFields),
+            _PasswordInput(),
+            const SizedBox(height: TSizes.spaceBtwInputFields),
 
-                /// Rememer me and forget password
+            /// Rememer me and forget password
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      children: [
-                        Checkbox(value: true, onChanged: (value) {}),
-                        const Text(TTexts.rememberMe),
-                      ],
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text(TTexts.forgetPassword))
+                    Checkbox(value: true, onChanged: (value) {}),
+                    const Text(TTexts.rememberMe),
                   ],
                 ),
-
-                const SizedBox(
-                  height: TSizes.spaceBtwSections,
-                ),
-
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        // FocusScope.of(context).unfocus();
-                        if (state.isFillFull == null || state.isFillFull == false) {
-                          context.read<LoginBloc>().add(LoginSubmitted());
-                        } else {
-
-                        }
-                      },
-                      child: Text(TTexts.signIn)),
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwSections,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                      onPressed: () {
-                        Get.to(() => const SignupScreen());
-                      },
-                      child: Text(TTexts.createAccount)),
-                ),
-                Text(
-                  state.username ?? 'No username entered',
-                  style: TextStyle(fontSize: 18),
-                ),
+                TextButton(
+                    onPressed: () {}, child: const Text(TTexts.forgetPassword))
               ],
             ),
+
+            const SizedBox(height: TSizes.spaceBtwSections),
+            _SignInButton(),
+            const SizedBox(height: TSizes.spaceBtwSections),
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                  onPressed: () {
+                    Get.to(() => const SignupScreen());
+                  },
+                  child: Text(TTexts.createAccount)),
+            ),
+          ],
+        ),
+      ),
+    );
+    ;
+  }
+}
+
+class _UsernameInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print('+++++++++++++++++++++ Build _UsernameInput +++++++++++++++++++++');
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return TextFormField(
+          onChanged: (username) =>
+              context.read<LoginBloc>().add(LoginUsernameChanged(username)),
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Iconsax.direct_right),
+            labelText: TTexts.emailOrUsername,
           ),
+        );
+      },
+    );
+  }
+}
+
+class _PasswordInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print('+++++++++++++++++++++ Build _PasswordInput +++++++++++++++++++++');
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return TextFormField(
+          onChanged: (password) =>
+              context.read<LoginBloc>().add(LoginPasswordChanged(password)),
+          decoration: const InputDecoration(
+            prefixIcon: Icon(Iconsax.password_check),
+            labelText: TTexts.password,
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _SignInButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print('+++++++++++++++++++++ Build _SignInButton +++++++++++++++++++++');
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+              onPressed: () {
+                // FocusScope.of(context).unfocus();
+                if (state.isFillFull == true) {
+                  context.read<LoginBloc>().add(LoginSubmitted());
+                } else {}
+              },
+              child: Text(TTexts.signIn)),
         );
       },
     );
