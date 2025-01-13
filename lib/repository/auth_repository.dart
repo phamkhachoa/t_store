@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 
 class AuthRepository {
-  Future<void> login(String username, String password) async {
+  Future<void> login({
+    String? username,
+    String? password,
+  }) async {
     try {
-      print(username);
-      print(password);
       final res = await Dio()
           .post('https://vpaygate.vinhomes.vn/api/iam/v0/login/local', data: {
         'username': username,
