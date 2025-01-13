@@ -58,6 +58,7 @@ class TLoginForm extends StatelessWidget {
                   },
                   child: Text(TTexts.createAccount)),
             ),
+            _TextArea(),
           ],
         ),
       ),
@@ -121,6 +122,18 @@ class _SignInButton extends StatelessWidget {
               },
               child: Text(TTexts.signIn)),
         );
+      },
+    );
+  }
+}
+
+class _TextArea extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    print('+++++++++++++++++++++ Build _TextArea +++++++++++++++++++++');
+    return BlocBuilder<LoginBloc, LoginState>(
+      builder: (context, state) {
+        return Text(state.username ?? 'nothing');
       },
     );
   }
