@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 abstract class LoginEvent {
   const LoginEvent();
 }
@@ -22,4 +24,19 @@ class LoginPasswordChanged extends LoginEvent {
 
   @override
   List<Object> get props => [password];
+}
+
+class UpdatePageOnboarding extends LoginEvent {
+  const UpdatePageOnboarding(this.value);
+
+  final int value;
+
+  @override
+  List<Object> get props => [value];
+}
+
+class NextPageOnboarding extends LoginEvent {
+  const NextPageOnboarding(this.pageController);
+
+  final PageController pageController;
 }

@@ -51,23 +51,4 @@ class OnboardingController extends ChangeNotifier {
     currentPageIndex.value = 2;
     pageController.jumpToPage(2);
   }
-
-  // Check onboarding and token status
-  Future<String> checkAppFlow() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool isOnboarded = prefs.getBool("onboarded") ?? false;
-    String? token = prefs.getString("token");
-
-    // Determine the navigation flow
-    if (!isOnboarded) {
-      // Navigate to onboarding screen
-     return Routes.onboardingPage;
-    } else if (token != null && token.isNotEmpty) {
-      // Navigate to home screen
-      return Routes.homePage;
-    } else {
-      // Navigate to login screen
-      return Routes.loginPage;
-    }
-  }
 }

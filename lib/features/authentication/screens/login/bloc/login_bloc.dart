@@ -1,30 +1,34 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:t_store/common/global.dart';
 import 'package:t_store/common/routes.dart';
 import 'package:t_store/features/authentication/screens/login/bloc/login_event.dart';
 import 'package:t_store/features/authentication/screens/login/bloc/login_state.dart';
 import 'package:t_store/repository/auth_repository.dart';
+import 'package:flutter/material.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
     on<LoginSubmitted>(_onSubmitted);
     on<LoginUsernameChanged>(_onUsernameChanged);
     on<LoginPasswordChanged>(_onPasswordChanged);
+    on<UpdatePageOnboarding>(_onUpdatePageOnboarding);
+    on<NextPageOnboarding>(_onNextPageOnboarding);
   }
 
   final AuthRepository _repository = AuthRepository();
 
   void _onSubmitted(
-      LoginSubmitted event,
-      Emitter<LoginState> emit,
-      ) async {
-    _onLogin(username: state.username,  password: state.password);
+    LoginSubmitted event,
+    Emitter<LoginState> emit,
+  ) async {
+    _onLogin(username: state.username, password: state.password);
   }
 
   void _onUsernameChanged(
-      LoginUsernameChanged event,
-      Emitter<LoginState> emit,
-      ) {
+    LoginUsernameChanged event,
+    Emitter<LoginState> emit,
+  ) {
     final username = event.username;
     emit(state.copyWith(
       // apiError: null,
@@ -36,18 +40,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _onPasswordChanged(
-      LoginPasswordChanged event,
-      Emitter<LoginState> emit,
-      ) {
+    LoginPasswordChanged event,
+    Emitter<LoginState> emit,
+  ) {
     final password = event.password;
-    emit(state.copyWith(
-        password: password));
+    emit(state.copyWith(password: password));
     bool isFillFull = _isFillFull(state);
     emit(state.copyWith(isFillFull: isFillFull));
   }
 
   bool _isFillFull(LoginState state) {
-    return state.username?.isNotEmpty == true && state.password?.isNotEmpty == true;
+    return state.username?.isNotEmpty == true &&
+        state.password?.isNotEmpty == true;
   }
 
   Future<void> _onLogin({String? username, String? password}) async {
@@ -59,8 +63,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           password: password,
         );
 
-          _registerDeviceToken();
-          // redirect to home
+        _registerDeviceToken();
+        // redirect to home
         Global.pushNamed(Routes.homePage, arguments: null);
       }
     } catch (_) {
@@ -71,11 +75,41 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     }
   }
 
+  void _onUpdatePageOnboarding(
+      UpdatePageOnboarding event, Emitter<LoginState> emit) {
+    int page = event.value;
+    emit(LoginState(pageIndex: page));
+  }
+
+
+  void _onNextPageOnboarding(
+      NextPageOnboarding event, Emitter<LoginState> emit) {
+    int nextPage = state.pageIndex + 1;
+    emit(state.copyWith(pageIndex: nextPage));
+    if (nextPage == 3) {
+      // mark is onboarded
+      markOnboarded();
+
+      // Router to login screen
+      Global.pushNamed(Routes.loginPage, arguments: null);
+      // Get.offAll(const LoginScreen());
+    } else {
+      event.pageController.animateToPage(nextPage,
+          duration: const Duration(milliseconds: 500),
+          curve: Curves.decelerate);
+    }
+  }
+
   bool isValidInput(String? username, String? password) {
     return username?.isNotEmpty == true && password?.isNotEmpty == true;
   }
 
   void _registerDeviceToken() {
     print('Register device token');
+  }
+
+  markOnboarded() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool("onboarded", true);
   }
 }

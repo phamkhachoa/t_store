@@ -16,6 +16,7 @@ class LoginState extends Equatable {
     // this.isShowBiometric = false,
     // this.typeBiometric,
     // this.sipAccountInfo,
+    this.pageIndex =0,
   });
 
   // final FormzSubmissionStatus status;
@@ -30,11 +31,13 @@ class LoginState extends Equatable {
   // final bool isShowBiometric;
   // final List<BiometricType>? typeBiometric;
   // final SipAccountModel? sipAccountInfo;
+  final int pageIndex;
 
   LoginState copyWith({
     String? username,
     String? password,
-    bool? isFillFull
+    bool? isFillFull,
+    int? pageIndex
   }) {
     var loginState = LoginState(
       // status: status ?? this.status,
@@ -42,6 +45,7 @@ class LoginState extends Equatable {
       isFillFull: isFillFull ?? this.isFillFull,
       username: username ?? this.username,
       password: password ?? this.password,
+      pageIndex: pageIndex ?? this.pageIndex,
       // apiError: apiError,
       // biometricType: biometricType ?? this.biometricType,
       // toggle: toggle ?? this.toggle,
@@ -64,6 +68,7 @@ class LoginState extends Equatable {
     // biometricType,
     // toggle,
     isFillFull,
+    pageIndex,
     // isSave,
     // typeBiometric,
     // sipAccountInfo

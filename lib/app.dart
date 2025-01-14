@@ -33,7 +33,7 @@ class App extends StatelessWidget {
         initialRoute: initRoute,
         routes: Routes.routes,
         // initialBinding: GeneralBindings(),
-        home: const OnBoardingScreen(),
+        home: OnBoardingScreen(),
       ),
     );
 
