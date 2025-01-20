@@ -7,6 +7,8 @@ import 'package:t_store/features/authentication/controllers.onboarding/onboardin
 import 'package:t_store/features/authentication/screens/login/bloc/login_bloc.dart';
 import 'package:t_store/features/authentication/screens/login/login.dart';
 import 'package:t_store/features/authentication/screens/onboarding/onboarding.dart';
+import 'package:t_store/features/shop/screens/home/bloc/home_bloc.dart';
+import 'package:t_store/features/shop/screens/navigation/bloc/navigation_bloc.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 import 'package:t_store/utils/theme/theme.dart';
 

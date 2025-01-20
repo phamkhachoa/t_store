@@ -8,7 +8,7 @@ import 'package:t_store/utils/constants/colors.dart';
 import 'package:t_store/utils/constants/image_strings.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 
-class TPromoSlider extends StatelessWidget {
+class TPromoSlider extends StatefulWidget {
   const TPromoSlider({
     super.key,
     required this.banners,
@@ -17,17 +17,24 @@ class TPromoSlider extends StatelessWidget {
   final List<String> banners;
 
   @override
+  State<TPromoSlider> createState() => _TPromoSliderState();
+}
+
+class _TPromoSliderState extends State<TPromoSlider> {
+  @override
   Widget build(BuildContext context) {
     final controller = Get.put(HomeController());
     return Column(
       children: [
         CarouselSlider(
           options: CarouselOptions(
+            autoPlay: true,
+            autoPlayInterval: const Duration(seconds: 3),
             viewportFraction: 1,
             onPageChanged: (index, reason) =>
                 controller.updatePageIndicator(index),
           ),
-          items: banners.map((url) => TRoundedImage(imageUrl: url)).toList(),
+          items: widget.banners.map((url) => TRoundedImage(imageUrl: url, width: 320, isNetworkImage: true,)).toList(),
         ),
         const SizedBox(
           height: TSizes.spaceBtwItems,

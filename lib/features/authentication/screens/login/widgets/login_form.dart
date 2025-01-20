@@ -6,7 +6,7 @@ import 'package:t_store/common/global.dart';
 import 'package:t_store/common/routes.dart';
 import 'package:t_store/features/authentication/screens/login/bloc/login_event.dart';
 import 'package:t_store/features/authentication/screens/signup/signup.dart';
-import 'package:t_store/navigation_menu.dart';
+import 'package:t_store/features/shop/screens/navigation/navigation_menu.dart';
 import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 
@@ -116,7 +116,7 @@ class _SignInButton extends StatelessWidget {
           child: ElevatedButton(
               onPressed: () {
                 // FocusScope.of(context).unfocus();
-                if (state.isFillFull == true) {
+                if (state.isFillFull == false) {
                   context.read<LoginBloc>().add(LoginSubmitted());
                 } else {}
               },

@@ -56,17 +56,18 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Future<void> _onLogin({String? username, String? password}) async {
     try {
-      if (isValidInput(username, password)) {
-        // emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
-        final apiError = await _repository.login(
-          username: username,
-          password: password,
-        );
-
-        _registerDeviceToken();
-        // redirect to home
-        Global.pushNamed(Routes.homePage, arguments: null);
-      }
+      Global.pushNamed(Routes.navigationPage, arguments: null);
+      // if (isValidInput(username, password)) {
+      //   // emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
+      //   final apiError = await _repository.login(
+      //     username: username,
+      //     password: password,
+      //   );
+      //
+      //   _registerDeviceToken();
+      //   // redirect to home
+      //   Global.pushNamed(Routes.navigationPage, arguments: null);
+      // }
     } catch (_) {
       // emit(state.copyWith(
       //   apiError: ApiError(code: ErrorCode.loginFailed),
