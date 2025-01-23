@@ -34,7 +34,17 @@ class _TPromoSliderState extends State<TPromoSlider> {
             onPageChanged: (index, reason) =>
                 controller.updatePageIndicator(index),
           ),
-          items: widget.banners.map((url) => TRoundedImage(imageUrl: url, width: 320, isNetworkImage: true,)).toList(),
+          items: widget.banners
+              .map((url) => TRoundedImage(
+                    imageUrl: url,
+                    width: 320,
+                    isNetworkImage: true,
+                    height: 150,
+                    borderRadius: 24,
+                    applyImageRadius: true,
+                    fit: BoxFit.fill,
+                  ))
+              .toList(),
         ),
         const SizedBox(
           height: TSizes.spaceBtwItems,

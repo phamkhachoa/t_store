@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:t_store/features/shop/screens/home/home.dart';
+import 'package:t_store/features/shop/screens/home/popup_bloc/popup_bloc.dart';
 import 'package:t_store/features/shop/screens/navigation/bloc/navigation_bloc.dart';
 import 'package:t_store/features/shop/screens/navigation/bloc/navigation_event.dart';
 import 'package:t_store/features/shop/screens/navigation/bloc/navigation_state.dart';
@@ -37,6 +38,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
       providers: [
         BlocProvider(create: (_) => HomeBloc()),
         BlocProvider(create: (_) => NavigationBloc()),
+        BlocProvider(create: (_) => PopupBloc()),
       ],
       child: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
