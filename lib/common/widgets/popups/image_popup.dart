@@ -25,10 +25,17 @@ class ImagePopup extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: InkWell(
+                  borderRadius: BorderRadius.circular(24),
                   onTap: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Icon(Icons.close, color: Colors.red, size: 24),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(24)
+                    ),
+                    child: Icon(Icons.close, color: Colors.black, size: 24,),
+                  ),
                 ),
               ),
               SizedBox(
