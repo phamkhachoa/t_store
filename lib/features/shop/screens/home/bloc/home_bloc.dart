@@ -12,7 +12,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _sliderFetch(SliderFetchEvent event, Emitter<HomeState> emit) async {
-    var res = await Future.delayed(Duration(seconds: 3), () {
+    var res = await Future.delayed(Duration(seconds: 10), () {
       print('Loaded slider list1');
     });
 
@@ -27,7 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _popularCategoryFetch(
       PopularCategoryFetchEvent event, Emitter<HomeState> emit) async {
-    var res = await Future.delayed(Duration(seconds: 1), () {
+    var res = await Future.delayed(Duration(seconds: 10), () {
       print('Loaded slider list1');
     });
 

@@ -14,6 +14,8 @@ import 'package:t_store/utils/helpers/helper_functions.dart';
 
 import '../../../personalization/screens/settings/settings.dart';
 import '../home/bloc/home_bloc.dart';
+import '../home/bloc/home_event.dart';
+import '../home/popup_bloc/popup_event.dart';
 import '../wishlist/wishlist.dart';
 
 class NavigationMenu extends StatefulWidget {
@@ -36,7 +38,9 @@ class _NavigationMenuState extends State<NavigationMenu> {
     final darkMode = THelperFunctions.isDarkMode(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => HomeBloc()),
+        BlocProvider(create: (_) => HomeBloc()
+          ..add(SliderFetchEvent())
+          ..add(PopularCategoryFetchEvent())),
         BlocProvider(create: (_) => NavigationBloc()),
         BlocProvider(create: (_) => PopupBloc()),
       ],
