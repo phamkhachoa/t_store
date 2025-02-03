@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 
 class LoginState extends Equatable {
   const LoginState({
-    // this.status = FormzSubmissionStatus.initial,
+    this.status = 'un_auth',
     // this.isValidInput = false,
     this.username,
     this.password,
@@ -19,7 +19,7 @@ class LoginState extends Equatable {
     this.pageIndex =0,
   });
 
-  // final FormzSubmissionStatus status;
+  final String status;
   // final bool? isValidInput;
   final String? username;
   final String? password;
@@ -37,10 +37,11 @@ class LoginState extends Equatable {
     String? username,
     String? password,
     bool? isFillFull,
-    int? pageIndex
+    int? pageIndex,
+    String? status
   }) {
     var loginState = LoginState(
-      // status: status ?? this.status,
+      status: status ?? this.status,
       // isValidInput: isValidInput ?? this.isValidInput,
       isFillFull: isFillFull ?? this.isFillFull,
       username: username ?? this.username,

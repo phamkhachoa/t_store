@@ -11,3 +11,7 @@ final class SliderFetchEvent extends HomeEvent {
 final class PopularCategoryFetchEvent extends HomeEvent {
   const PopularCategoryFetchEvent();
 }
+
+final class LoginSuccessEvent extends HomeEvent {
+  const LoginSuccessEvent();
+}

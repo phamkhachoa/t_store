@@ -8,7 +8,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc() : super(HomeState()) {
     on<SliderFetchEvent>(_sliderFetch);
     on<PopularCategoryFetchEvent>(_popularCategoryFetch);
-    // on<LoadPopupEvent>(_popupImagesFetch);
+    on<LoginSuccessEvent>(_onLoginSuccess);
   }
 
   void _sliderFetch(SliderFetchEvent event, Emitter<HomeState> emit) async {
@@ -57,4 +57,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   //
   //   emit(state.copyWith(imagesPopups: imagesPopups));
   // }
+
+  void _onLoginSuccess(LoginSuccessEvent event, Emitter<HomeState> emit) async {
+    // add event
+    add(SliderFetchEvent());
+    add(PopularCategoryFetchEvent());
+  }
 }

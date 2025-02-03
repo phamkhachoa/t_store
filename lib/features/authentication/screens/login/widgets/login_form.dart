@@ -11,6 +11,8 @@ import 'package:t_store/utils/constants/sizes.dart';
 import 'package:t_store/utils/constants/text_strings.dart';
 
 import '../../../../../repository/auth_repository.dart';
+import '../../../../shop/screens/home/bloc/home_bloc.dart';
+import '../../../../shop/screens/home/bloc/home_event.dart';
 import '../bloc/login_bloc.dart';
 import '../bloc/login_state.dart';
 
@@ -117,7 +119,12 @@ class _SignInButton extends StatelessWidget {
               onPressed: () {
                 // FocusScope.of(context).unfocus();
                 if (state.isFillFull == false) {
-                  context.read<LoginBloc>().add(LoginSubmitted());
+                  context.read<LoginBloc>().add(LoginSubmitted(
+                    onSuccess: () {
+                      // context.read<HomeBloc>().add(LoginSuccessEvent());
+                      Global.pushNamed(Routes.navigationPage, arguments: null);
+                    },
+                  ));
                 } else {}
               },
               child: Text(TTexts.signIn)),

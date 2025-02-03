@@ -38,9 +38,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
     final darkMode = THelperFunctions.isDarkMode(context);
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => HomeBloc()
-          ..add(SliderFetchEvent())
-          ..add(PopularCategoryFetchEvent())),
+        BlocProvider(create: (_) => HomeBloc()),
         BlocProvider(create: (_) => NavigationBloc()),
         BlocProvider(create: (_) => PopupBloc()),
       ],

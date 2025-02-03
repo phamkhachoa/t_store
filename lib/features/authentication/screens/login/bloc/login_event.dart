@@ -5,7 +5,11 @@ abstract class LoginEvent {
 }
 
 final class LoginSubmitted extends LoginEvent {
-  const LoginSubmitted();
+  const LoginSubmitted({
+    required this.onSuccess,
+  });
+
+  final VoidCallback onSuccess;
 }
 
 class LoginUsernameChanged extends LoginEvent {

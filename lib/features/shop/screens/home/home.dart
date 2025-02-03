@@ -19,23 +19,32 @@ import '../../../../common/widgets/products/product_cards/product_card_vertical.
 import '../../../../common/widgets/texts/section_heading.dart';
 import 'bloc/home_event.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    // add fetch slider event
+    BlocProvider.of<HomeBloc>(context).add(SliderFetchEvent());
+    BlocProvider.of<HomeBloc>(context).add(PopularCategoryFetchEvent());
+    BlocProvider.of<PopupBloc>(context).add(LoadPopupEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<PopupBloc, PopupState>(
-          listener: (context, state) {
-            var urls = state.imagesPopups;
-            for (var value in urls) {
-              _openPopupDialog(context, value);
-            }
-          },
-          // child: HomePageBody(),
-        )
-      ],
+    return BlocListener<PopupBloc, PopupState>(
+      listener: (context, state) {
+        var urls = state.imagesPopups;
+        for (var value in urls) {
+          _openPopupDialog(context, value);
+        }
+      },
       child: HomePageBody(),
     );
   }

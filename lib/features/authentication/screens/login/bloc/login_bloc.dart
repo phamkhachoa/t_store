@@ -7,6 +7,11 @@ import 'package:t_store/features/authentication/screens/login/bloc/login_state.d
 import 'package:t_store/repository/auth_repository.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../shop/screens/home/bloc/home_bloc.dart';
+import '../../../../shop/screens/home/bloc/home_event.dart';
+import '../../../../shop/screens/home/popup_bloc/popup_bloc.dart';
+import '../../../../shop/screens/home/popup_bloc/popup_event.dart';
+
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginState()) {
     on<LoginSubmitted>(_onSubmitted);
@@ -22,7 +27,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     LoginSubmitted event,
     Emitter<LoginState> emit,
   ) async {
-    _onLogin(username: state.username, password: state.password);
+    _onLogin(username: state.username, password: state.password, onSuccess: event.onSuccess);
   }
 
   void _onUsernameChanged(
@@ -54,9 +59,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         state.password?.isNotEmpty == true;
   }
 
-  Future<void> _onLogin({String? username, String? password}) async {
+  Future<void> _onLogin({
+    String? username,
+    String? password,
+    required VoidCallback onSuccess,
+  }) async {
     try {
-      Global.pushNamed(Routes.navigationPage, arguments: null);
+      onSuccess();
+      // emit(state.copyWith(status: 'authenticated'));
+      // Global.pushNamed(Routes.navigationPage, arguments: null);
       // if (isValidInput(username, password)) {
       //   // emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
       //   final apiError = await _repository.login(
@@ -68,6 +79,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       //   // redirect to home
       //   Global.pushNamed(Routes.navigationPage, arguments: null);
       // }
+      // Dispatch a success event to the HomeBloc or PopupBloc
+      // add(LoadPopupEvent());
     } catch (_) {
       // emit(state.copyWith(
       //   apiError: ApiError(code: ErrorCode.loginFailed),
@@ -81,7 +94,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     int page = event.value;
     emit(LoginState(pageIndex: page));
   }
-
 
   void _onNextPageOnboarding(
       NextPageOnboarding event, Emitter<LoginState> emit) {
