@@ -25,6 +25,18 @@ class Global {
     int count = box.get(feature.name, defaultValue: 0);
     box.put(feature.name, count + 1);
   }
+
+  static void pop<T extends Object?>([T? result]) {
+    if (getNav().canPop()) {
+      getNav().pop<T>(result);
+    } else {
+      print("No routes to pop");
+    }
+  }
+
+  static Future<Object?> popAndPushNamed(String name, {Object? arguments}) {
+    return getNav().popAndPushNamed(name, arguments: arguments);
+  }
 }
 
 void logEvent(String name, {Map<String, Object>? parameters}) async {

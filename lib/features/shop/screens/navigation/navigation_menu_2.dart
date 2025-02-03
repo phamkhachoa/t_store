@@ -6,9 +6,9 @@
 // import 'package:iconsax/iconsax.dart';
 // import 'package:t_store/features/shop/screens/home/home.dart';
 // import 'package:t_store/features/shop/screens/home/popup_bloc/popup_bloc.dart';
-// import 'package:t_store/features/shop/screens/navigation/bloc/navigation_bloc.dart';
-// import 'package:t_store/features/shop/screens/navigation/bloc/navigation_event.dart';
-// import 'package:t_store/features/shop/screens/navigation/bloc/navigation_state.dart';
+// import 'package:t_store/features/shop/screens/navigation/bloc/product_detail_bloc.dart';
+// import 'package:t_store/features/shop/screens/navigation/bloc/product_detail_event.dart';
+// import 'package:t_store/features/shop/screens/navigation/bloc/product_detail_state.dart';
 // import 'package:t_store/features/shop/screens/store/store.dart';
 // import 'package:t_store/utils/helpers/helper_functions.dart';
 //

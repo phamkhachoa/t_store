@@ -64,12 +64,13 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _loadHomeData(BuildContext context) {
+    print('Load home data ------------');
     context.read<HomeBloc>()
       ..add(PopularCategoryFetchEvent())
       ..add(SliderFetchEvent());
 
-    context.read<PopupBloc>()
-      .add(LoadPopupEvent());
+    // context.read<PopupBloc>()
+    //   .add(LoadPopupEvent());
   }
 }
 
@@ -160,7 +161,7 @@ class HomePageBody extends StatelessWidget {
                         /// -- Popular Products
                         TGridLayout(
                           itemCount: 4,
-                          itemBuilder: (_, index) => TProductCardVertical(),
+                          itemBuilder: (_, index) => TProductCardVertical(productId: index.toString(),),
                         ),
                       ],
                     )),
